@@ -3,7 +3,7 @@ ISN
 
 Ressources pour la spécialité informatique au lycée
 
-# labyrinthes 
+# Labyrinthes 
 
   Un projet pour découvrir la génération de labyrinthes.
   * labyrinthes/resources contient les énoncés.
