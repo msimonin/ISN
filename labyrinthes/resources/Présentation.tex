@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt,dvips]{article}
+\usepackage{blum}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\geometry{hmargin=2cm,vmargin=1cm}
+
+\pagestyle{empty}
+\begin{document}
+ 
+\entete{Dans un labyrinthe et \dots autour }{ProjetISN:12/13}
+
+\subsection{Quelques exemples}
+  \begin{minipage}{0.5\textwidth}
+      \centering \includegraphics[width=5cm]{images_jeux/dm.eps}
+      \caption{Un niveau de Dungeon Master} 
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \centering \includegraphics[width=5cm]{images_jeux/chartres.eps}
+    \caption{Au sol de la cathédrale de Chartres}
+  \end{minipage}
+  
+  \begin{center}
+    \centering \includegraphics[width=10cm]{images_jeux/100x100.eps}
+    \caption{Un labyrinthe de taille $100\times100$ généré par ordinateur}
+    \label{gros}
+  \end{center}
+
+
+  \subsection{Quelques hypothèses}
+    
+    Un labyrinthe est constitué d'un ensemble de cases. Ces cases seront de deux types :
+    \begin{itemize}
+      \item un morceau de couloir, c'est à dire une case sur laquelle on peut marcher (en blanc sur les dessins précédents),
+      \item ou un mur, c'est à dire une case sur laquelle on ne peut pas marcher (en noir).
+    \end{itemize}
+    \vfill
+
+
+      Dans un labyrinthe on veut pouvoir aller d'un point $A$ (l'entrée) à un point $B$ (la sortie) et  
+      ces points ne sont pas nécessairement sur la périphérie du labyrinthe (on peut penser au niveau successifs d'un donjon reliés par des escaliers).
+      Dans certains labyrinthes, aller de $A$ à $B$ sera 
+      \begin{itemize}
+	\item impossible (le constructeur du labyrinthe est un sadique),
+	\item possible par un seul chemin (le constructeur est sympa mais pas trop),
+	\item possible par plusieurs chemins (le constructeur est très sympa).\\
+      \end{itemize}
+      \vfill
+      Ces distinctions conduisent à envisager une classification des labyrinthes. 
+      Dans la suite on tendra à privilégier le labyrinthes du deuxième type qui seront dit parfaits 
+      \footnote{On ira se référer à \url{http://fr.wikipedia.org/wiki/Mod\%C3\%A9lisation_math\%C3\%A9matique_d\%27un_labyrinthe}}.
+      \footnote{Le labyrinthe de la figure \ref{gros} est parfait}
+      \vfill
+      
+  \subsection{Représentation du problème}
+      Les cases de nos labyrinthes seront carrées et on choisit de les représenter par les cellules d'un tableau à double entrée dans lequel 
+      on codera par $0$ la présence d'un mur et par $1$ l'absence de mur. Un tel tableau s'appelle une \emph{matrice}.
+      
+      \begin{exemple}
+      \item
+      
+       \begin{minipage}{0.5\textwidth}
+        \includegraphics[width=9cm]{images_jeux/7x7.eps}
+       \end{minipage}
+       \hfill
+       \begin{minipage}{0.5\textwidth}
+	 \begin{tabular}{c|*{7}{c}}
+	    \backslashbox{$j$}{$i$} & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ 
+				\hline
+				0  & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\
+				1  & 0 & 1 & 0 & 0 & 0 & 1 & 1 \\
+				2  & 1 & 1 & 1 & 1 & 1 & 0 & 1 \\
+				3  & 1 & 0 & 1 & 0 & 1 & 0 & 0 \\
+				4  & 1 & 1 & 0 & 1 & 1 & 1 & 1 \\
+				5  & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\ 
+				6  & 1 & 0 & 1 & 0 & 1 & 1 & 1 \\
+	 \end{tabular}
+       \end{minipage}
+
+      \end{exemple}
+
+
+  \subsection{Objectifs}
+    \begin{enumerate}[$\bullet$]
+     \item \'Etude de la génération de labyrinthe. Conception d'une solution et visualisation graphique des étapes de construction.
+     \item \'Etude de méthodes pour chercher la sortie d'un labyrinthe. 
+    \end{enumerate}
+
+%   \subsection{Modalités}
+%     Le langage retenu pour mener le projet est \emph{python}. 
+%     Nous utiliserons la librairie graphique \emph{matplotlib} pour les visualisations et \emph{numpy} pour les manipulations de matrices.
+%     \begin{enumerate}[$\bullet$]
+%      \item Séance 1 : \\
+% 	    Distinguer les différents types de labyrinthes.
+% 	    Se familiariser avec l'environnement de travail. \\
+% 	    Sur un exemple facile (génération aléatoire).
+% 	    Jeux avec les paramètres.
+% 	    Sauvegarde sous forme d'une vidéo.
+% 	    Sauvegarde sous forme d'un fichier.
+% 	    Lecture à partir d'un fichier.\\
+% 	    Affichage d'un labyrinthe à partir d'un fichier.
+% 	    
+%      \item Séance 2 : \\
+% 	    programmer quelques fonctions. \\
+% 	    \og Qualité \fg d'un labyrinthe : 
+% 	    \begin{itemize}
+% 	      \item longueur de la plus grand ligne droite,
+% 	      \item nombre de cul-de-sac,
+% 	      \item nombre virages \dots
+% 	    \end{itemize}
+% 	    Des fichers de labyrinthe seront fournis.
+%      \item Séance 3 : Un algorithme de génération et sa mise en \oe uvre.
+%      \item Séance 4 : des idées pour le parcours.
+%      \item Séance 5 : ajustement / développement en fonction du temps.
+%      \item Séance 6 : présentation des élèves.
+%     \end{enumerate}
+
+  \includegraphics[width=5.5cm]{images_labyrinthes/imparfait1.eps}
+  \includegraphics[width=5.5cm]{images_labyrinthes/parfait1.eps}
+  \includegraphics[width=5.5cm]{images_labyrinthes/parfait3.eps}
+
+  \includegraphics[width=5.5cm]{images_labyrinthes/imparfait4.eps}
+  \includegraphics[width=5.5cm]{images_labyrinthes/imparfait2.eps}
+  \includegraphics[width=5.5cm]{images_labyrinthes/parfait4.eps}
+
+  \includegraphics[width=5.5cm]{images_labyrinthes/parfait5.eps}
+  \includegraphics[width=5.5cm]{images_labyrinthes/parfait2.eps}
+  \includegraphics[width=5.5cm]{images_labyrinthes/imparfait3.eps}
+  
+
+ \newpage
+\end{document}
+
+
+
