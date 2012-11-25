@@ -1,0 +1,15 @@
+\documentclass[a4paper,12pt,dvips]{article}
+\usepackage{blum}
+\usepackage{geometry}
+\geometry{hmargin=2cm,vmargin=1cm}
+
+\pagestyle{empty}
+\begin{document}
+ 
+
+\entete{{Dans un labyrinthe et \dots autour }{ProjetISN:12/13}
+
+\end{document}
+
+
+

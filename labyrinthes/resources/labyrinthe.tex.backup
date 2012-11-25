@@ -1,0 +1,76 @@
+\documentclass[a4paper,12pt,dvips]{article}
+\usepackage{blum}
+\usepackage{geometry}
+\geometry{hmargin=2cm,vmargin=1cm}
+\usepackage{hyperref}
+\pagestyle{empty}
+\begin{document}
+ 
+\entete{Dans un labyrinthe et autour \dots}{TS-ISN:12/13}
+
+\subsection{Principaux objectifs}
+
+  \begin{enumerate}[$\bullet$]
+    \item Savoir définir et reconnaître différents types de labyrinthe : 
+      \begin{itemize}
+	\item parfait
+	\item non parfait
+      \end{itemize}.
+  
+    \item Savoir faire le lien labyrinthe $\leftrightarrow$ graphe. \\
+	  C'est un arbre dans le cas d'un labyrinthe parfait.
+
+    \item Savoir mettre en \oe uvre un algorithme de recherche de de la sortie dans un labyrinthe parfait.
+	  Lien avec le parcours sur l'arbre.
+
+    \item Comprendre l'algorithme de Prim de génération de labyrinthe parfait.
+	  Proposer une amélioration de l'algorithme pour améliorer la \og qualité \fg du labyrinthe
+
+    \item L'algorithme de Prim dans un autre contexte $\leftrightarrow$ : recherche d'un arbre couvrant minimal. \\
+	  Exemple d'un réseau électrique.
+  \end{enumerate}
+
+\subsection{Modalités}
+
+  \subsubsection{Séance 1}
+    \begin{itemize}
+      \item Des exemples de labyrinthes (parfaits ou non),
+      \item Un exemple de génération : aléatoire $\diamond$
+      \item Graphes correspondants,
+      \item Parcours ?
+    \end{itemize}
+    
+  \subsubsection{Séance 2}
+    Calcul de qualité d'un labyrinthe parfait.
+     \begin{itemize}
+      \item nombre de murs, $\star$
+      \item Plus longue ligne droite, $\star$
+      \item Nombre de virages\dots $\star$
+      \item Nombre de cul-de-sac. $\star$
+     \end{itemize}
+
+  \subsubsection{Séance 3}
+      Suite qualité.
+      Algorithme de Prim
+  \subsubsection{Séance 4}
+      Algorithme de Prim amélioré
+  \subsubsection{Séance 5}
+    Application à la recherche d'un arbre couvrant minimal (ex d'un réseau électrique)
+
+\subsection{Resources}
+\begin{tabular}{ll}
+    
+   culturelle 	& \url{http://fr.wikipedia.org/wiki/Labyrinthe}   \\
+
+   informatique & \\
+   \multicolumn{2}{l}{\url{http://fr.wikipedia.org/wiki/Mod\%C3\%A9lisation_math\%C3\%A9matique_d\%27un_labyrinthe}} \\
+
+		& Tangente \no 57 \\
+	    
+		& Tangente Hors Série \no 12 \\
+
+\end{tabular}
+\end{document}
+
+
+
