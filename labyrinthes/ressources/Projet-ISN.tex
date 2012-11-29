@@ -1,0 +1,249 @@
+\documentclass[a4paper,11pt,dvips]{article}
+\usepackage{blum}
+\usepackage{geometry}
+\geometry{hmargin=2cm,vmargin=1cm}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\pagestyle{empty}
+\begin{document}
+
+\entete{Première partie}{ProjetISN:12/13}
+\setcounter{subsection}{0}
+\subsection{Différents types de labyrinthes}
+  Reconnaître parmi les labyrinthes précédents, ceux qui sont parfaits ou non.
+  \begin{minipage}{0.3\textwidth}
+   
+  \end{minipage}
+
+\subsection{Une première idée pour générer un labyrinthe}
+
+Cette partie a pour but de vous familiariser avec les manipulations utiles par la suite du projet. 
+Prenez du temps pour tester les programmes, les modifier \dots.
+
+\subsubsection{Entreprise de démolition}
+\begin{flushright}
+  \vspace{-0.5cm} \ovalbox{
+   \begin{minipage}{0.3\textwidth}
+    \flushright répertoire \texttt{demolition/}
+  \end{minipage}
+  }
+\end{flushright}
+  
+Pour générer un labyrinthe, on peut partir d'un labyrinthe rempli de murs et les casser : 
+
+\begin{verbatim}
+import numpy as np
+import matplotlib.pyplot as plt
+"""
+Nombre de cases du labyrinthe en ligne  et en colonne 
+"""
+n = 4
+p = 7
+"""
+Un labyrinthe est initialement rempli de murs
+"""
+labyrinthe = np.zeros((n,p),int)
+"""
+On casse un mur
+"""
+labyrinthe[2,1] = 1
+"""
+On affiche le resultat
+"""
+fig = plt.figure()
+im = plt.imshow(labyrinthe, interpolation='None', cmap='gist_gray')
+plt.show()
+\end{verbatim}  
+
+Quels murs seront cassés si j'écris cela ? 
+\begin{verbatim}
+ for j in range(p):
+   labyrinthe[2,j] = 1
+\end{verbatim}
+ 
+\begin{remb}
+ Vous remarquerez que la fenêtre graphique possède une petite barre d'outils 
+qui permettent quelques actions sur le dessin : 
+\includegraphics[width=4cm]{images/barre_outils.eps}. En particulier la sauvegarde sous forme d'un fichier images (.png \dots)
+\end{remb}
+
+
+
+\subsubsection{Vers un premier algorithme \dots}
+\begin{flushright}
+  \vspace{-0.5cm} \ovalbox{
+   \begin{minipage}{0.4\textwidth}
+    \flushright répertoire \texttt{premierAlgorithme/}
+  \end{minipage}
+  }
+\end{flushright}
+
+  Récupérer le fichier \verb?premierAlgorithme.py?. \\
+  Vous pouvez le lancer, changer les paramètre \texttt{n}, \texttt{p}, \texttt{murs\_a\_casser}.\\
+  Vous devez savoir expliquer son fonctionnement.\\
+  
+  \begin{remb}
+   La ligne \verb?np.savetxt("premierAlgorithme.txt",labyrinthe,fmt="%d")? 
+   permet de sauvegarder dans un fichier le labyrinthe.\\
+   Ceci permettra de sauvegarder vos labyrinthes sous forme d'un fichier texte.
+  \end{remb}
+
+
+
+\subsubsection{Animons la démolition}
+  Pour effectuer une animation, il faut sauvegarder tous les labyrinthes intermédiaires. 
+  Ensuite on les affiche les uns après les autres pour réaliser l'animation voulue.
+  Nous allons modifier le script python précédent en ajoutant les lignes suivantes (au bon endroit) : 
+  \begin{enumerate}[$\bullet$]
+   \item \verb?import matplotlib.animation as animation? dans l'entête pour bénéficier des fonctions d'animation,
+   \item On stockera les images dans une liste (initialement vide). \\
+	  On ajoute donc avant la boucle \verb?images = []?
+   \item \`A la fin de chaque tour de boucle, on sauvegarde l'image du labyrinthe en cours :
+	\begin{verbatim}
+	  im = plt.imshow(np.copy(labyrinthe), interpolation='None', cmap='gist_gray')
+	  images.append([im])
+	\end{verbatim}
+    \item On dessine l'animation
+    \begin{verbatim}
+ani = animation.ArtistAnimation(fig, images, interval=1, blit=True,repeat_delay=1000)
+plt.show()
+    \end{verbatim}
+  \end{enumerate}
+
+\begin{remb}
+  \begin{itemize}
+   \item Le script python est disponible sous le nom \texttt{[anim]premierAlgorithme.py}.
+   \item Vous remarquerez qu'une ligne permet de sauvegarder le fichier sous forme d'une vidéo 
+(attention cela peut ralentir la génération du labyrinthe - désactiver la sauvegarde en mettant un \# devant la ligne pour les gros labyrinthes)
+  \end{itemize}
+
+\end{remb}
+
+
+\subsection{Une autre idée}
+\begin{flushright}
+  \vspace{-0.5cm} \ovalbox{
+   \begin{minipage}{0.3\textwidth}
+    \flushright répertoire \texttt{fractal/}
+  \end{minipage}
+  }
+\end{flushright}
+
+  { \begin{flushright} \textit{\dots c'est ici que commencent les choses sérieuses.} \end{flushright}}
+
+
+  Comparer les dessins suivants et en déduire un méthode de génération de labyrinthes. \\
+
+  Le but est donc d'écrire un algorithme permettant la génération de ce type de labyrinthe. \\
+
+  \begin{enumerate}[$\bullet$]
+   \item Série 1 : \\	
+    \includegraphics[width=4cm]{../fractal/images/fractal0.eps}
+    \includegraphics[width=4cm]{../fractal/images/fractal1.eps}
+    \includegraphics[width=4cm]{../fractal/images/fractal2.eps}
+    \includegraphics[width=4cm]{../fractal/images/fractal3.eps}    
+   \item Série 2 : \\
+    \includegraphics[width=4cm]{../fractal/images/fractal0.eps}
+    \includegraphics[width=4cm]{../fractal/images/fractal1-1.eps}
+    \includegraphics[width=4cm]{../fractal/images/fractal2-2.eps}
+    \includegraphics[width=4cm]{../fractal/images/fractal3-3.eps} 
+  \end{enumerate}
+  
+  \begin{minipage}{0.5\textwidth}
+  \begin{verbatim}
+import numpy as np
+import matplotlib.pyplot as plt
+fig = plt.figure()
+labyrinthe = np.loadtxt("base7x7.txt")
+#
+#
+#Votre algorithme ici
+#
+#  
+im = plt.imshow(labyrinthe,
+    interpolation='None', 
+    cmap='gist_gray')
+plt.show()
+  \end{verbatim}   
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+  La structure du fichier est la suivante :\\
+
+  On commence par charger un fichier de base, \\
+
+  on effectue des opérations pour construire un labyrinthe plus grand, \\
+
+  on affiche le résultat.
+  \end{minipage}
+
+
+
+  
+  \textbf{Ressources : }
+  \begin{enumerate}[$\bullet$]
+   \item Sur les labyrinthes fractals (attention la représentation des labyrinthes n'est pas tout à fait la même que nous): 
+    \begin{itemize}
+     \item \url{http://www.astrolog.org/labyrnth/algrithm.htm#perfect}
+     \item \url{http://www.mathcurve.com/fractals/hilbert/hilbert.shtml}
+     \item \url{http://www.mathcurve.com/fractals/peano/peano.shtml}
+    \end{itemize}
+
+   \item Opération sur les matrices : 
+   \begin{itemize}
+      \item \url{http://docs.scipy.org/doc/numpy/reference/generated/numpy.vstack.html}
+      \item \url{http://docs.scipy.org/doc/numpy/reference/generated/numpy.hstack.html}
+      \item \url{http://docs.scipy.org/doc/numpy/reference/generated/numpy.rot90.html}
+      \item \url{http://docs.scipy.org/doc/numpy/reference/generated/numpy.fliplr.html}
+      \item \url{http://docs.scipy.org/doc/numpy/reference/generated/numpy.flipud.html} 
+    \end{itemize}
+  \item Vous trouverez des labyrinthes de base dans le répertoire \texttt{fractal/bases/}\\
+	Ce sont des fichiers textes, vous pouvez en créer d'autres vous même.
+    
+      \begin{minipage}{0.4\textwidth}
+	\begin{verbatim}
+# base7x7.txt
+0 0 0 1 0 0 0
+0 1 1 1 1 1 0
+0 0 0 1 0 0 0
+1 1 1 1 1 1 1
+0 1 0 0 0 1 0
+0 1 0 1 1 1 0
+0 0 0 1 0 0 0
+	\end{verbatim}
+      \end{minipage}
+      \hfill
+      \begin{minipage}{0.4\textwidth}
+	 \begin{verbatim}
+	  # hilbert.txt
+0 1 0 0 0
+0 1 1 1 0
+0 0 0 1 0
+1 1 1 1 0
+0 0 0 0 0
+	 \end{verbatim}
+
+      \end{minipage}
+
+\begin{center}
+  \begin{minipage}{0.5\textwidth}
+    \begin{verbatim}
+    #base9X9.txt
+    0 0 0 0 0 0 0 0 0
+    0 1 1 1 1 1 0 1 0
+    0 1 0 1 0 1 0 1 0
+    0 1 0 1 0 1 1 1 0
+    0 1 0 0 0 0 0 1 0
+    0 1 1 1 0 1 1 1 0
+    0 1 0 1 0 0 0 1 0
+    0 1 0 1 1 1 0 1 0
+    0 0 0 0 0 0 0 0 0
+    \end{verbatim}
+  \end{minipage}
+\end{center}
+  \end{enumerate}
+
+\end{document}
+
+
+
