@@ -1,0 +1,44 @@
+\documentclass[a4paper,11pt,dvips]{article}
+\usepackage{blum}
+\usepackage{geometry}
+\geometry{hmargin=2cm,vmargin=1cm}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\pagestyle{empty}
+\begin{document}
+ 
+\entete{Deuxième partie}{ProjetISN:12/13}
+
+La première partie avait pour but de vous familiariser avec l'environnement et d'étudier deux algorithmes de génération 
+de labyrinthes : aléatoires et fractals.\footnote{J'espère pouvoir voir bientôt de jolies figures en particulier sur les labyrinthes fractals
+(autres que celles données dans l'énoncé)}.
+
+Dans cette deuxième partie nous allons continuer notre cheminement dans le monde des labyrinthes\dots
+
+
+  \subsection{Qualité d'un labyrinthe}
+    Les premiers labyrinthes construits ont des allures bien différentes.
+    \'Ecrire en python des programmes prenant en entrée un labyrinthe et calculant : 
+    \begin{enumerate}[$\bullet$]
+     \item sa densité : c'est à dire le ration cases noires / cases blanches,
+     \item sa plus grande ligne droite,
+     \item son nombre de cul-de-sacs,
+     \item son nombre de carrefours.
+    \end{enumerate}
+  Les deux derniers points se calculeront plus facilement sur des labyrinthes dont le couloirs ne font pas plus d'une case de largeur, vous aurez des exemples dans le répertoire \texttt{qualite}.
+
+  \subsection{D'autres algorithmes}
+
+    Comme vous aurez pu le constater en parcourant les ressources à votre disposition sur le sujet, 
+    il existe de nombreux algorithmes de génération de labyrinthes.\\
+    L'algorithme de Prim en fait partie. \\
+    Votre travail consiste à:
+    \begin{enumerate}[$\bullet$]
+     \item comprendre cet algorithme, c'est à dire à être capable à l'aide d'une feuille 
+	    et d'un stylo (et d'une gomme !) de générer des labyrinthes de petites tailles,\\
+     \item le comparer avec un autre algorithme de votre choix (autre que ceux vus précédemment), \\
+     \item le coder en python.
+    \end{enumerate}
+
+
+\end{document}
